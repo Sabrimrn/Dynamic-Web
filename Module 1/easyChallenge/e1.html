@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>quiz</title>
+</head>
+<body>
+    <script>
+        let naam = prompt("Wat is je naam? ");
+        let score = 0;
+
+        //Vraag 1
+        let antwoord1 = prompt("Wat is de juiste syntaxis om 'Hello World' uit te schrijven in JavaScript? ");
+        if(antwoord1.toLocaleLowerCase()=== "console.log('hello world')") {
+            alert("Goed gedaan!");
+            score++;
+        }else{
+            alert("Fout! Het juiste antwoord is console.log('Hello World')");
+        }
+
+        //Vraag 2 
+        let antwoord2 = prompt("Hoe declareer je een variabele in JavaScript? ");
+        if(antwoord2.toLocaleLowerCase() === "let"){
+            alert("Goed gedaan! ");
+            score++;
+        }else{
+            alert("Fout! Het juiste antwoord is let.");
+        }
+
+        //Vraag 3
+        let antwoord3 = prompt("Hoe roep je een functie aan in JavaScript?");
+        if (antwoord3.toLowerCase() === "functieNaam()"){
+            alert("Goed gedaan!");
+            score++;
+        } else {
+            alert("Fout! Het juiste antwoord is functieNaam().");
+        }
+
+        //Totaalscore
+        alert(`${naam}, je hebt ${score} van de 3 vragen correct beantwoordt.`);
+    </script>
+    
+</body>
+</html>
