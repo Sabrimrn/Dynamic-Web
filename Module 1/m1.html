@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <style>
+        .highlight { text-decoration: underline; }
+        .red-text { color: red; }
+    </style>
+
+    <div class="container">
+        <p class="special">Eerste paragraaf</p>
+        <p id="second">Tweede paragraaf</p>
+        <p class="special">Derde paragraaf</p>
+        <span class="special">Een span</span>
+    </div>
+    <div id="output"></div>
+
+    <script>
+        // Alle elementen met de klasse "special" vinden en hun tekst rood maken
+        var specialElements = document.querySelectorAll('.special');
+        specialElements.forEach(function(element) {
+            element.classList.add('red-text');
+        });
+
+        // De tweede paragraaf vinden en onderstrepen
+        var secondParagraph = document.getElementById('second');
+        secondParagraph.classList.add('highlight');
+
+        // Het aantal gevonden "special" elementen tonen in het output div
+        var outputDiv = document.getElementById('output');
+        outputDiv.textContent = "Aantal special elementen: " + specialElements.length;
+    </script>
+    
+</body>
+</html>

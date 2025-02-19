@@ -6,6 +6,22 @@
     <title>Document</title>
 </head>
 <body>
-    
+    <div id="loadingMessage">Loading...</div>
+
+    <img src="https://picsum.photos/800/600">
+    <img src="https://picsum.photos/800/601">
+    <img src="https://picsum.photos/800/602">
+
+    <script>
+        window.addEventListener('load', function() {
+            // Verander de tekst naar "Welcome!" wanneer de pagina geladen is
+            document.getElementById("loadingMessage").innerText = "Welcome!";
+
+            // Verberg de tekst na 2 seconden
+            setTimeout(function() {
+                document.getElementById("loadingMessage").style.display = "none";
+            }, 2000);
+        });
+    </script>
 </body>
 </html>
