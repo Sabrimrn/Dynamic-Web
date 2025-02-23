@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id="recipeCard">
+        <input type="text" id="recipeName" placeholder="Naam van het recept">
+        <input type="number" id="prepTime" placeholder="Bereidingstijd (minuten)">
+        <textarea id="ingredients" placeholder="Ingrediënten (1 per regel)"></textarea>
+        <button id="generateCard">Genereer Recept Kaart</button>
+        
+        <div id="result"></div>
+    </div>
+
+    <script>
+        document.getElementById('generateCard').addEventListener('click', function(){
+            const recipeName = document.getElementById('recipeName').value;
+            const prepTime = document.getElementById('prepTime').value;
+            const ingredientsText = document.getElementById('ingredients').value;
+
+            const ingredientsArray = ingredientsText.split('\n').filter(ingredient => ingredient.trim() !== '');
+
+            const resultDiv = document.getElementById('result');
+            resultDiv.innerHTML = `
+            <h2>🥘 ${recipeName}</h2>
+                <p>⏱️ Bereidingstijd: ${prepTime} minuten</p>
+                <h3>Ingrediënten:</h3>
+                <ul>
+                    ${ingredientsArray.map(ingredient => `<li>${ingredient}</li>`).join('')}
+                </ul>
+                `;
+        });
+
+    </script>
+</body>
+</html>
