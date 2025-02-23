@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id="scoreCalculator">
+        <input type="number" id="score" placeholder="Voer score in (0-20)">
+        <button id="addScore">Voeg Score Toe</button>
+        
+        <div id="stats">
+            <p>Gemiddelde score: <span id="average">0</span></p>
+            <p>Hoogste score: <span id="highest">0</span></p>
+        </div>
+        
+        <ul id="scoreList"></ul>
+    </div>
+
+    <script>
+        let scores = [];
+
+        document.getElementById('addScore').addEventListener('click', function() {
+            const scoreInput = document.getElementById('score');
+            const score = parseInt(scoreInput.value);
+
+            if(score >= 0 && score <= 20) {
+                scores.push(score);
+                updateStats();
+                updateScoreList();
+            }else {
+                alert('Voer een geldige score in tussen 0 en 20.');
+            }
+
+            scoreInput.value = '';
+        });
+
+        function updateStats() {
+            const total = scores.reduce((sum, score) => sum + score, 0);
+            const average = total / scores.length;
+            const highest = Math.max(...scores);
+
+            document.getElementById('average').innerText = average.toFixed(2);
+            document.getElementById('highest').innerText = highest;
+        }
+
+        function updateScoreList() {
+            const scoreList = document.getElementById('scoreList');
+            scoreList.innerHTML = '';
+
+            scores.forEach(score=> {
+                const li = document.createElement('li');
+                li.innerText = score;
+                scoreList.appendChild(li);
+            });
+        }
+
+    </script>
+</body>
+</html>
