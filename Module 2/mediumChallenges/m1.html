@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id="shoppingCart">
+        <div id="addProduct">
+            <input type="text" id="productName" placeholder="Product naam">
+            <input type="number" id="productPrice" placeholder="Prijs">
+            <button id="addToCart">Voeg toe aan winkelwagen</button>
+        </div>
+    
+        <div id="cartControls">
+            <button id="sortByPrice">Sorteer op prijs</button>
+            <p>Totaal: €<span id="total">0.00</span></p>
+        </div>
+    
+        <ul id="cartItems"></ul>
+    </div>
+
+    <script>
+        let products = [];
+
+        document.getElementById('addToCart').addEventListener('click', function() {
+            const productName = document.getElementById('productName').value;
+            const productPrice = parseFloat(document.getElementById('productPrice').value);
+
+            if(productPrice > 0){
+                products.push({name:productName, price:productPrice});
+                updateCart();
+            }else { 
+                alert('Voer een geldige productnaam en prijs in');
+            }
+        });
+
+        document.getElementById('sortByPrice').addEventListener('click', function(){
+            products.sort((a, b) => a.price - b.price);
+            updateCart();
+        });
+
+        function updateCart() {
+            const cartItems = document.getElementById('cartItems');
+            cartItems.innerHTML = "";
+
+            let total = 0;
+            products.forEach((product, index)=> {
+                total += product.price;
+                const li = document.createElement("li");
+                li.innerHTML = `${product.name} - €${product.price.toFixed(2)} <button onclick="removeProduct(${index})">Verwijder</button>`;
+                cartItems.appendChild(li);
+            });
+
+            document.getElementById("total").innerText = total.toFixed(2);
+        };
+
+        window.removeProduct = function(index) {
+            cart.splice(index, 1);
+            updateCart();
+          };
+
+    </script>
+</body>
+</html>
