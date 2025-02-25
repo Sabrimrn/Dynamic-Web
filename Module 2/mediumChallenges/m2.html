@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+
+    <div id="studentDashboard">
+        <div id="addGrade">
+            <select id="student">
+                <option value="Alex">Alex</option>
+                <option value="Sam">Sam</option>
+                <option value="Jo">Jo</option>
+            </select>
+            <input type="text" id="course" placeholder="Vaknaam">
+            <input type="number" id="grade" placeholder="Score (0-20)">
+            <button id="addGrade">Voeg Score Toe</button>
+        </div>
+    
+        <div id="studentOverview"></div>
+    </div>
+    <script>
+        // Studenten data opslaan
+        const students = {
+            Alex: [],
+            Sam: [],
+            Jo: []
+        };
+
+        // Functie om een score toe te voegen
+        function addGrade() {
+            const student = document.getElementById('student').value;
+            const course = document.getElementById('course').value;
+            const grade = parseInt(document.getElementById('grade').value);
+
+            if (course && grade >= 0 && grade <= 20) {
+                students[student].push({ course, grade });
+                displayResults();
+            } else {
+                alert('Voer een geldige vaknaam en score in (0-20).');
+            }
+        }
+
+        // Functie om de resultaten weer te geven
+        function displayResults() {
+            const studentOverview = document.getElementById('studentOverview');
+            studentOverview.innerHTML = '';
+
+            for (const student in students) {
+                const courses = students[student];
+
+                if (courses.length > 0) {
+                    let totalGrade = 0;
+                    let highestGrade = -Infinity;
+                    let lowestGrade = Infinity;
+                    let courseList = '';
+
+                    for (const course of courses) {
+                        totalGrade += course.grade;
+                        highestGrade = Math.max(highestGrade, course.grade);
+                        lowestGrade = Math.min(lowestGrade, course.grade);
+                        courseList += `<li>${course.course}: ${course.grade}</li>`;
+                    }
+
+                    const averageGrade = (totalGrade / courses.length).toFixed(2);
+
+                    studentOverview.innerHTML += `
+                        <div>
+                            <h3>${student}</h3>
+                            <ul>
+                                ${courseList}
+                            </ul>
+                            <p>Gemiddelde score: ${averageGrade}</p>
+                            <p>Hoogste score: ${highestGrade}</p>
+                            <p>Laagste score: ${lowestGrade}</p>
+                        </div>
+                    `;
+                }
+            }
+        }
+
+        // Event listener voor de knop 'Voeg Score Toe'
+        document.getElementById('addGrade').addEventListener('click', addGrade);
+    </script>    
+   
+</body>
+</html>
